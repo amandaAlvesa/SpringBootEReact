@@ -1,0 +1,26 @@
+package br.com.servico;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import br.com.entities.ProdutoModelo;
+import br.com.entities.RespostaModelo;
+import br.com.repositorio.ProdutoRepositorio;
+
+@Service
+public class ProdutoServico {
+
+	@Autowired
+	private ProdutoRepositorio pr;
+	
+	@Autowired
+	private RespostaModelo rm;
+	
+	public Iterable<ProdutoModelo>listar(){
+		return pr.findAll();
+	}
+	public ResponseEntity<?> cadastrar(ProdutoModelo pm){
+		if(pm.)
+	}
+}
