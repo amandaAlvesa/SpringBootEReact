@@ -21,15 +21,26 @@ public class ProdutoServico {
 	public Iterable<ProdutoModelo>listar(){
 		return pr.findAll();
 	}
-	public ResponseEntity<?> cadastrar(ProdutoModelo pm){
+	
+	public ResponseEntity<?> cadastrarAlterar(ProdutoModelo pm, String acao){
+	
 		if(pm.getName().equals("")) {
 			rm.setMensagem("Insira o Nome do Produto");
 			return new ResponseEntity<RespostaModelo>(rm, HttpStatus.BAD_REQUEST);
 		}else if(pm.getMarca().equals("")) {
 			rm.setMensagem("Insira o Nome da Marca");
 			return new ResponseEntity<RespostaModelo>(rm, HttpStatus.BAD_REQUEST);
-		}else {
+		}else if(acao.equals("cadastrar")){
 			return new ResponseEntity<ProdutoModelo>(pr.save(pm), HttpStatus.CREATED);
+		}else {
+			return new ResponseEntity<ProdutoModelo>(pr.save(pm), HttpStatus.OK);
+
 		}
+	}
+	
+	public ResponseEntity<RespostaModelo> remover(Long codigo){
+		pr.deleteById(codigo);
+		rm.setMensagem("Produto Deletado!");
+		return new ResponseEntity<RespostaModelo>(rm, HttpStatus.OK);
 	}
 }
